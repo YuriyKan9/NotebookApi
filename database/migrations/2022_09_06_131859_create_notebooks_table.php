@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('ФИО');
             $table->string('Компания')->nullable();
             $table->string('Телефон');
-            $table->string('email');
+            $table->string('Email')->unique('notebooks');
             $table->string('Дата_рождения')->nullable();
             $table->string('Фото')->nullable();
             $table->timestamps();

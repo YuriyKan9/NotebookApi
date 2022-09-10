@@ -1,0 +1,275 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "NoteBookApi",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/v1/notebook": {
+            "get": {
+                "tags": [
+                    "Notebook"
+                ],
+                "summary": "Show",
+                "description": "Show all notes",
+                "operationId": "3278597f70ffcf3df60a694e0ff0d1c1",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "notebook": {
+                                            "$ref": "#/components/schemas/Notebook"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Notebook"
+                ],
+                "summary": "Store New Note",
+                "description": "Create New Note",
+                "operationId": "f737e96f4910ff283e75bc7e05c8379f",
+                "parameters": [
+                    {
+                        "name": "Info",
+                        "in": "path",
+                        "description": "Information about yourself that you want to pass in ",
+                        "required": true,
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Notebook"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful operation"
+                    },
+                    "422": {
+                        "description": "Returns when you forget to pass required field or fields",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The фио field is required"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/notebook/{id}": {
+            "get": {
+                "tags": [
+                    "Notebook"
+                ],
+                "summary": "Show note with id that you passed in",
+                "description": "Show note with id that you passed in",
+                "operationId": "a07418b0decb4969394e79f597aa543f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of note to show",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "notebook": {
+                                            "$ref": "#/components/schemas/Notebook"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Notebook"
+                ],
+                "summary": "Update Note",
+                "description": "Update Note",
+                "operationId": "f7e5828725095adf9cb16e88426f28e6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of note that you want to update",
+                        "required": true
+                    },
+                    {
+                        "name": "Information to update",
+                        "in": "path",
+                        "description": "Information that you want to update ",
+                        "required": true,
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Notebook"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "notebook": {
+                                            "$ref": "#/components/schemas/Notebook"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Returns when note doesn't exist",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Internal server error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Notebook"
+                ],
+                "summary": "Delete Note",
+                "description": "Delete Note",
+                "operationId": "6be314584e9cc2d22f7dff1d0b286f21",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of note to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Note was deleted successfully!"
+                    },
+                    "404": {
+                        "description": "Returns when note doesn't exist",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No query results for model"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Notebook": {
+                "required": [
+                    "ФИО",
+                    "Телефон",
+                    "Email"
+                ],
+                "properties": {
+                    "ФИО": {
+                        "title": "ФИО",
+                        "description": "User Name",
+                        "type": "string",
+                        "example": "Юрий Канительщиков"
+                    },
+                    "Компания": {
+                        "title": "Компания",
+                        "description": "Название компании",
+                        "type": "string",
+                        "example": "Nestle"
+                    },
+                    "Телефон": {
+                        "title": "Телефон",
+                        "description": "Телефон пользователя",
+                        "type": "string",
+                        "example": "8-901-283-40-30"
+                    },
+                    "Email": {
+                        "title": "Email",
+                        "description": "email пользователя",
+                        "type": "string",
+                        "example": "kanitely@icloud.com"
+                    },
+                    "Дата_рождения": {
+                        "title": "Дата_рождения",
+                        "description": "Дата рождения пользователя",
+                        "type": "string",
+                        "example": "21-10-1999"
+                    },
+                    "Фото": {
+                        "title": "Фото",
+                        "description": "Ваше фото",
+                        "type": "string",
+                        "example": "hello.jpg"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Notebook"
+                }
+            }
+        }
+    }
+}
