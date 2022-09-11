@@ -49,11 +49,8 @@ class NotebookController extends Controller
  * summary="Store New Note",
  * description="Create New Note",
  * tags={"Notebook"},
-*      @OA\Parameter(
-    * description="Information about yourself that you want to pass in ",
-     *         in="path",
-     *         name="Info",
-     *         required=true,
+*  @OA\RequestBody(
+     *          required=true,
      *          @OA\JsonContent(ref="#/components/schemas/Notebook")
      *      ),
  * @OA\Response(
@@ -142,12 +139,13 @@ class NotebookController extends Controller
      *         in="path",
      *         name="id",
      *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64",
+     *         )
      *     ),
- * @OA\Parameter(
-    * description="Information that you want to update ",
-     *         in="path",
-     *         name="Information to update",
-     *         required=true,
+*   @OA\RequestBody(
+     *          required=true,
      *          @OA\JsonContent(ref="#/components/schemas/Notebook")
      *      ),
  * @OA\Response(

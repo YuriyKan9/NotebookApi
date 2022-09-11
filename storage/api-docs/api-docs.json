@@ -38,21 +38,16 @@
                 "summary": "Store New Note",
                 "description": "Create New Note",
                 "operationId": "f737e96f4910ff283e75bc7e05c8379f",
-                "parameters": [
-                    {
-                        "name": "Info",
-                        "in": "path",
-                        "description": "Information about yourself that you want to pass in ",
-                        "required": true,
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Notebook"
-                                }
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Notebook"
                             }
                         }
                     }
-                ],
+                },
                 "responses": {
                     "201": {
                         "description": "Successful operation"
@@ -126,22 +121,23 @@
                         "name": "id",
                         "in": "path",
                         "description": "ID of note that you want to update",
-                        "required": true
-                    },
-                    {
-                        "name": "Information to update",
-                        "in": "path",
-                        "description": "Information that you want to update ",
                         "required": true,
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Notebook"
-                                }
-                            }
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
                         }
                     }
                 ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Notebook"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Success",
